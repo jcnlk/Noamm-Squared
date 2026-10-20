@@ -49,7 +49,7 @@ object ExampleFeature : Feature(
     // Creates a draggable HUD element. It will only render if this feature is enabled.
     private val sprintHud = hudElement(
         name = "Sprint Status",
-        centered = true
+        centered = { true }
     ) { context: GuiGraphicsExtractor, isExample: Boolean ->
         val text = if (isExample) "[Sprinting]"
         else if (mc.player?.isSprinting == true) "[Sprinting]" else "[Walking]"

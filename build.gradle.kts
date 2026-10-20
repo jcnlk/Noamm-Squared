@@ -5,10 +5,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "2.3.21"
-    id("net.fabricmc.fabric-loom") version "1.16.2"
+    kotlin("jvm")
+    id("net.fabricmc.fabric-loom")
     id("maven-publish")
-    id ("org.jetbrains.kotlin.plugin.serialization") version "2.3.21"
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 
 version = project.property("mod_version") as String
@@ -18,7 +18,7 @@ base {
     archivesName.set(project.property("archives_base_name") as String)
 }
 
-val targetJavaVersion = 25
+val targetJavaVersion = providers.gradleProperty("java_version").get().toInt()
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     withSourcesJar()
@@ -49,10 +49,10 @@ dependencies {
 
     implementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_version")}")
 
-    runtimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.2")
+    runtimeOnly("me.djtheredstoner:DevAuth-fabric:${project.property("dev_auth_version")}")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
-    include("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${project.property("kotlinx_serialization_version")}")
+    include("org.jetbrains.kotlinx:kotlinx-serialization-json:${project.property("kotlinx_serialization_version")}")
 
     implementation("com.github.Noamm9:NoammAddons:${project.property("noammaddons_version")}:${project.property("noammaddons_type")}")
 }
